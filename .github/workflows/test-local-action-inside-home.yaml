@@ -10,6 +10,10 @@ on:
 
 jobs:
   local_test_home:
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ["1.7.0", "1.8.2", "1.9.0", "1.10.0", "1.11.0", "latest"]
     runs-on: ubuntu-latest
     env:
       BATS_LIB_PATH: "${{ github.workspace }}/tests"
@@ -22,6 +26,7 @@ jobs:
         id: bats-action
         uses: ./
         with:
+          bats-version: ${{ matrix.version }}
           support-clean: "false"
           support-path: "${{ github.workspace }}/tests/bats-support"
           assert-clean: "false"
@@ -55,10 +60,16 @@ jobs:
           cd /tmp/bats-file/
           bats test
       - name: Execute example tests
-        run:
+        run: |
+          echo $PATH
           bats -T -p tests
+
   local_test_home_trigger_cache:
     needs: [local_test_home]
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ["1.7.0", "1.8.2", "1.9.0", "1.10.0", "1.11.0", "latest"]
     runs-on: ubuntu-latest
     env:
       BATS_LIB_PATH: "${{ github.workspace }}/tests"
@@ -71,6 +82,7 @@ jobs:
         id: bats-action
         uses: ./
         with:
+          bats-version: ${{ matrix.version }}
           support-clean: "false"
           support-path: "${{ github.workspace }}/tests/bats-support"
           assert-clean: "false"
@@ -87,7 +99,6 @@ jobs:
       - name: Execute test to check  Bats-assert
         if: steps.bats-action.outputs.assert-installed == 'true'
         run: |
-          ls -l $BATS_LIB_PATH/
           cd /tmp/bats-assert/
           bats test
       - name: Execute test to check Bats-detik
