@@ -10,6 +10,10 @@ on:
 
 jobs:
   local_test_options:
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ["1.7.0", "1.8.2", "1.9.0", "1.10.0", "1.11.0", "latest"]
     runs-on: ubuntu-latest
     env:
       BATS_LIB_PATH: "/usr/lib"
@@ -21,7 +25,7 @@ jobs:
       - name: Setup Bats and Bats libs
         uses: ./
         with:
-          bats-version: 1.9.0
+          bats-version: ${{ matrix.version }
           support-clean: "false"
           assert-clean: "false"
           detik-install: "true"
