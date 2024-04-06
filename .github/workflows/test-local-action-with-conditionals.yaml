@@ -25,7 +25,7 @@ jobs:
       - name: Setup Bats and Bats libs
         uses: ./
         with:
-          bats-version: ${{ matrix.version }
+          bats-version: ${{ matrix.version }}
           support-clean: "false"
           assert-clean: "false"
           detik-install: "true"
