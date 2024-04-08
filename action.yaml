@@ -11,7 +11,7 @@ inputs:
     required: false
     default: true
   bats-version:
-    description: "Bats version, default to latest (1.10.0 atm)"
+    description: "Bats version, default to latest (1.11.0 atm)"
     required: false
   # support
   support-install:
