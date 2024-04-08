@@ -22,7 +22,7 @@ jobs:
        - name: Checkout
          uses: actions/checkout@v2
        - name: Setup Bats and bats libs
-         uses: bats-core/bats-action@1.5.4
+         uses: bats-core/bats-action@2.0.0
 ```
 
 ## Libraries Path
@@ -35,7 +35,7 @@ For example, if you want to install `bats-support` in the `./test/bats-support` 
 ``` yaml
 # ...
        - name: Setup Bats and Bats libs
-         uses: bats-core/bats-action@1.5.4
+         uses: bats-core/bats-action@2.0.0
          with:
            support-path: ${{ github.workspace }}/test/bats-support
 ```
@@ -59,7 +59,7 @@ The caching mechanism for the `bats binary` is always available. However, the ca
 | assert-path      | `/usr/lib/bats-assert` | false | Bats-assert path |
 | assert-clean     | `true`    | false    | Bats-assert: clean temp files                   |
 | detik-install    | `true`   | false    | Bats-detik installation        |
-| detik-version    | `1.2.1`   | false    | Bats-detik version        |
+| detik-version    | `1.3.0`   | false    | Bats-detik version        |
 | detik-path       | `/usr/lib/bats-detik` | false | Bats-detik path |
 | detik-clean      | `true`    | false    | Bats-detik: clean temp files                    |
 | file-install     | `true`    | false    | Bats-file installation     |
@@ -76,17 +76,3 @@ The caching mechanism for the `bats binary` is always available. However, the ca
 | assert-installed | True/False if bats-assert has been installed   |
 | detik-installed  | True/False if bats-detik has been installed    |
 | file-installed   | True/False if bats-file has been installed     |
-
-## TODO
-
-* [X] Add more tests
-
-* [X] Add Bats binary
-
-* [X] Add cache for bats binary
-
-* [X] Better Readme
-
-* [x] Remove sudo in case of bats libs installed in $HOME
-
-* [x] Add cache for bats libs
